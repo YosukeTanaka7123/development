@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  clipvote-backend-dev:
+    container_name: clipvote-backend-dev
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # NOTE: POSTGRES_DB/USER/PASSWORD should match values in db container
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_USER: postgres
+        POSTGRES_DB: postgres
+        POSTGRES_HOSTNAME: clipvote-db
+
+    init: true
+    volumes:
+      # Mount the root folder that contains .git
+      - ../..:/workspace:cached
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:clipvote-db
+
+  clipvote-db:
+    container_name: clipvote-db
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - ../../clipvote/backend/initdb:/docker-entrypoint-initdb.d
+      - clipvote-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+
+volumes:
+  clipvote-db-data:

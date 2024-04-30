@@ -1,0 +1,54 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "clipvote-frontend-dev",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+
+	"workspaceMount":"source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/workspace/clipvote/frontend",
+
+	// An array of Docker CLI arguments. More info: https://docs.docker.com/reference/cli/docker/container/run
+	"runArgs": ["--init", "--name=clipvote-frontend-dev"],
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "bash -i -c 'nvm install --lts'"
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+		  // Set *default* container specific settings.json values on container create.
+		  "settings": {
+			"npm.packageManager": "yarn",
+			"eslint.packageManager": "yarn",
+			"code-eol.color": "#444",
+			"editor.tabSize": 2,
+			"editor.codeActionsOnSave": [
+			  "source.addMissingImports",
+			  "source.fixAll.eslint"
+			],
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.formatOnSave": true,
+			"prettier.prettierPath": "./node_modules/prettier"
+		  },
+		  "extensions": [
+			"sohamkamani.code-eol",
+			"ms-azuretools.vscode-docker",
+			"esbenp.prettier-vscode"
+		  ]
+		}
+	  }
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

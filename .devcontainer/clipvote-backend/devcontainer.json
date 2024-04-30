@@ -1,0 +1,47 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java-postgres
+{
+	"name": "clipvote-backend-dev",
+	// Or use a Image or Dockerfile. More info: https://containers.dev/guide/dockerfile
+	"dockerComposeFile":["compose.yml"],
+	"service":"clipvote-backend-dev",
+	"workspaceFolder": "/workspace/clipvote/backend",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [5432],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"code-eol.color": "#444",
+				"editor.tabSize": 2,
+				"editor.codeActionsOnSave": [
+					"source.addMissingImports",
+					"source.fixAll.eslint"
+				],
+				"editor.formatOnSave": true,
+				"java.configuration.maven.userSettings": ".mvn/settings.xml"
+			},
+			"extensions": [
+				"sohamkamani.code-eol",
+				"ms-azuretools.vscode-docker",
+				"vscjava.vscode-java-pack",
+				"vscjava.vscode-lombok"
+			]
+		}
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
