@@ -1,18 +1,18 @@
-version: '3'
+version: "3"
 
 services:
-  clipvote-backend-dev:
-    container_name: clipvote-backend-dev
-    build: 
+  clipvote-dev:
+    build:
       context: .
       dockerfile: Dockerfile
+    image: clipvote-dev:latest
+    container_name: clipvote-dev
     environment:
       # NOTE: POSTGRES_DB/USER/PASSWORD should match values in db container
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_USER: postgres
-        POSTGRES_DB: postgres
-        POSTGRES_HOSTNAME: clipvote-db
-
+      POSTGRES_PASSWORD: p@ssw0rd
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_HOSTNAME: clipvote-db
     init: true
     volumes:
       # Mount the root folder that contains .git
@@ -27,12 +27,12 @@ services:
     image: postgres:latest
     restart: unless-stopped
     volumes:
-      - ../../clipvote/backend/initdb:/docker-entrypoint-initdb.d
       - clipvote-db-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: p@ssw0rd
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
 
 volumes:
   clipvote-db-data:
+    name: clipvote-db-data

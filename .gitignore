@@ -1,0 +1,27 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# clipvote
+## dependencies
+/clipvote/node_modules
+# testing
+/clipvote/coverage
+## next.js
+/clipvote/.next/
+/clipvote/out/
+## production
+/clipvote/build
+# local env files
+/clipvote/.env*.local
+
+# charastore
+## dependencies
+/charastore/node_modules
+# testing
+/charastore/coverage
+## next.js
+/charastore/.next/
+/charastore/out/
+## production
+/charastore/build
+# local env files
+/charastore/.env*.local
