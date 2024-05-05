@@ -5,7 +5,7 @@
   // Or use a Image or Dockerfile. More info: https://containers.dev/guide/dockerfile
   "dockerComposeFile": ["compose.yml"],
   "service": "clipvote-dev",
-  "workspaceFolder": "/workspace/clipvote",
+  "workspaceFolder": "/workspaces/clipvote",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
@@ -13,10 +13,11 @@
   },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [5432],
+  // This can be used to network with other containers or with the host.
+  "forwardPorts": [5432],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "git config --global --add safe.directory /workspace",
+  "postCreateCommand": "git config --global --add safe.directory /workspaces",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -24,10 +25,8 @@
     "vscode": {
       // Set *default* container specific settings.json values on container create.
       "settings": {
-        // common
         "git.openRepositoryInParentFolders": "always",
         "npm.packageManager": "yarn",
-        "code-eol.color": "#444",
         "editor.tabSize": 2,
         "editor.codeActionsOnSave": [
           "source.addMissingImports",
@@ -35,11 +34,18 @@
         ],
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
-        "prettier.prettierPath": "./node_modules/prettier"
+
+        "terminals.autorun": true,
+        "terminals.autokill": true,
+        "terminals.terminals": [
+          {
+            "name": "clipvote-app",
+            "commands": ["cd clipvote-app", "clear"]
+          }
+        ]
       },
       "extensions": [
         "fabiospampinato.vscode-terminals",
-        "sohamkamani.code-eol",
         "ms-azuretools.vscode-docker",
         "donjayamanne.githistory",
         "GitHub.copilot",

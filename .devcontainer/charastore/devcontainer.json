@@ -4,8 +4,8 @@
   "name": "charastore-dev",
   // Or use a Image or Dockerfile. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-  "workspaceFolder": "/workspace/charastore",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/charastore",
 
   // An array of Docker CLI arguments. More info: https://docs.docker.com/reference/cli/docker/container/run
   "runArgs": ["--init", "--name=charastore-dev"],
@@ -19,7 +19,7 @@
   // "forwardPorts": [5432],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "git config --global --add safe.directory /workspace",
+  "postCreateCommand": "git config --global --add safe.directory /workspaces",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -30,19 +30,15 @@
         // common
         "git.openRepositoryInParentFolders": "always",
         "npm.packageManager": "yarn",
-        "code-eol.color": "#444",
         "editor.tabSize": 2,
         "editor.codeActionsOnSave": [
           "source.addMissingImports",
           "source.fixAll.eslint"
         ],
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
-        "prettier.prettierPath": "./node_modules/prettier"
+        "editor.formatOnSave": true
       },
       "extensions": [
-        "fabiospampinato.vscode-terminals",
-        "sohamkamani.code-eol",
         "ms-azuretools.vscode-docker",
         "donjayamanne.githistory",
         "GitHub.copilot",
