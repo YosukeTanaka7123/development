@@ -12,6 +12,17 @@
 /clipvote/build
 # local env files
 /clipvote/.env*.local
+## dependencies
+/clipvote/clipvote-app/node_modules
+# testing
+/clipvote/clipvote-app/coverage
+## next.js
+/clipvote/clipvote-app/.next/
+/clipvote/clipvote-app/out/
+## production
+/clipvote/clipvote-app/build
+# local env files
+/clipvote/clipvote-app/.env*.local
 
 # charastore
 ## dependencies

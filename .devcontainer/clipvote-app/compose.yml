@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  clipvote-dev:
+    build: .
+    image: clipvote-dev:latest
+    container_name: clipvote-dc
+    init: true
+    volumes:
+      # Mount the root folder that contains .git
+      - ../..:/workspaces:cached
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:clipvote-db
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+  clipvote-db:
+    container_name: clipvote-db
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - clipvote-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: p@ssw0rd
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+volumes:
+  clipvote-db-data:
+    name: clipvote-db-data
