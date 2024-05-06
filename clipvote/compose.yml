@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  # SSL Container. More info: https://github.com/SteveLTN/https-portal
+  clipvote-ssl:
+    image: steveltn/https-portal:1
+    container_name: clipvote-ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    environment:
+      DOMAINS: "localhost -> http://clipvote-app:3000"
+      STAGE: "local"
+      # STAGE: "staging"
+      # STAGE: 'production' # Don't use production until staging works
+      # FORCE_RENEW: 'true'
+    volumes:
+      - clipvote-ssl-data:/var/lib/https-portal
+
+  clipvote-app:
+    build: ./clipvote-app
+    image: clipvote-app:latest
+    container_name: clipvote-app
+
+volumes:
+  clipvote-ssl-data:
+    name: clipvote-ssl-data
