@@ -23,6 +23,19 @@ services:
     image: clipvote-app:latest
     container_name: clipvote-app
 
+  clipvote-db:
+    container_name: clipvote-db
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - clipvote-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: p@ssw0rd
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+
 volumes:
   clipvote-ssl-data:
     name: clipvote-ssl-data
+  clipvote-db-data:
+    name: clipvote-db-data

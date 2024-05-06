@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { Suspense } from 'react'
+import { Choices } from './components/choices'
 
 export default function Home() {
   return (
@@ -14,6 +16,9 @@ export default function Home() {
         />
       </div>
       <p>hello</p>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Choices />
+      </Suspense>
     </main>
   )
 }
