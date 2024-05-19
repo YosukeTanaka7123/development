@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  vite-nest-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vite-nest-dev:latest
+    container_name: vite-nest-dev
+    init: true
+    volumes:
+      # Mount the root folder that contains .git
+      - ../..:/workspaces:cached
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity

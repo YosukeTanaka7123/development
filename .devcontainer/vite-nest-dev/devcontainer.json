@@ -1,0 +1,66 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+{
+  "name": "vite-nest-dev",
+  // Or use a Image or Dockerfile. More info: https://containers.dev/guide/dockerfile
+  "dockerComposeFile": ["compose.yml"],
+  "service": "vite-nest-dev",
+  "workspaceFolder": "/workspaces/vite-nest",
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [5432],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "git config --global --add safe.directory /workspaces",
+
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        // common
+        "git.openRepositoryInParentFolders": "always",
+        "npm.packageManager": "yarn",
+        "editor.tabSize": 2,
+        "editor.codeActionsOnSave": [
+          "source.addMissingImports",
+          "source.fixAll.eslint"
+        ],
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+
+        "terminals.autorun": true,
+        "terminals.autokill": true,
+        "terminals.terminals": [
+          {
+            "name": "vite-app",
+            "commands": ["cd vite-app", "clear"]
+          },
+          {
+            "name": "nest-app",
+            "commands": ["cd nest-app", "clear"]
+          }
+        ]
+      },
+      "extensions": [
+        "fabiospampinato.vscode-terminals",
+        "ms-azuretools.vscode-docker",
+        "donjayamanne.githistory",
+        "GitHub.copilot",
+
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  }
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}

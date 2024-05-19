@@ -1,0 +1,20 @@
+# development mode
+## docker compose build
+# production mode
+## docker compose build --build-arg MODE=production
+services:
+  vite-app:
+    build:
+      context: ./vite-app
+      args:
+        - MODE=development
+    image: vite-app:latest
+    container_name: vite-app
+    ports:
+      - "80:80"
+  nest-app:
+    build: ./nest-app
+    image: nest-app:latest
+    container_name: nest-app
+    ports:
+      - "3000:3000"
