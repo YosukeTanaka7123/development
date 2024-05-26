@@ -18,3 +18,20 @@ services:
     container_name: nest-app
     ports:
       - "3000:3000"
+  vite-nest-test:
+    image: mcr.microsoft.com/playwright:v1.44.1-jammy
+    container_name: vite-nest-test
+    init: true
+    ipc: host
+    ports:
+      - "9323:9323"
+    volumes:
+      # DevContainer 内で参照された場合はワークスペースフォルダをマウントする.
+      # DevContainer 外で参照された場合はカレントディレクトリをマウントする.
+      # see https://docs.docker.com/compose/environment-variables/env-file/#interpolation
+      - ${LOCAL_WORKSPACE_FOLDER:-.}/vite-nest-test:/test
+    depends_on:
+      - vite-app
+      - nest-app
+    working_dir: /test
+    command: npx playwright test

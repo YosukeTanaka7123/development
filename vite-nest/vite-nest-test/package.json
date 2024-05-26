@@ -1,0 +1,14 @@
+{
+  "name": "vite-nest-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.12.12"
+  },
+  "scripts": {
+    "test": "COMPOSE_FILE=../compose.yml docker compose build && docker compose down vite-nest-test && docker compose up vite-nest-test",
+    "report": "playwright show-report"
+  }
+}
