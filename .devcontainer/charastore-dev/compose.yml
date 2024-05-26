@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  charastore-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: charastore-dev:latest
+    container_name: charastore-dev
+    init: true
+    volumes:
+      # Mount the root folder that contains .git
+      - ../..:/workspaces:cached
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity

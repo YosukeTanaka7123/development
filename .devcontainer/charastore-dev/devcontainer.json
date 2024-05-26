@@ -3,12 +3,9 @@
 {
   "name": "charastore-dev",
   // Or use a Image or Dockerfile. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces,type=bind,consistency=cached",
+  "dockerComposeFile": ["compose.yml"],
+  "service": "charastore-dev",
   "workspaceFolder": "/workspaces/charastore",
-
-  // An array of Docker CLI arguments. More info: https://docs.docker.com/reference/cli/docker/container/run
-  "runArgs": ["--init", "--name=charastore-dev"],
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
